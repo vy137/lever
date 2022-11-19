@@ -55,8 +55,15 @@ body {
 .handleSliderContainer {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1px 1fr 1px;
+  grid-template-columns: 0 1fr 0;
   place-items: center;
+
+  &:hover {
+    filter: brightness(120%);
+  }
+  // &:active {
+  //   filter: brightness(180%)
+  // }
 }
 
 .handleSlider {

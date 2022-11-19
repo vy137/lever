@@ -23,7 +23,7 @@ export default function SliderStep(props: SliderStepProps) {
       <button
         children={props.children}
         className={`${props.className} buttonReset`}
-        onClick={props.onClick}
+        onMouseUp={props.onClick}
       />
     );
 
