@@ -48,7 +48,7 @@ function App() {
   // When you have to do shit
   const updatePowerOut = (index: number) => {
     if (index === 0) return;
-    const newPowerOut = getDiff(index);
+    const newPowerOut = powerOut + getDiff(index);
     setPowerOut(newPowerOut);
 
     addToActionLog({
