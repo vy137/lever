@@ -22,6 +22,11 @@ body {
   height: 100%;
 }
 
+.buttonReset {
+  background: none;
+  border: none;
+}
+
 .appearBefore {
   transform: translateZ(-10px);
 }
@@ -77,4 +82,38 @@ body {
   width: 250px;
   background-color: #d12f37;
   z-index: 2;
+}
+
+.gauge {
+  color: white;
+  text-align: right;
+}
+
+.controlGrid {
+  display: flex;
+  flex-flow: column;
+  justify-items: stretch;
+  gap: 8px;
+
+  button {
+    margin-top: 2px;
+    padding: 8px;
+    background-color: black;
+    color: white;
+    margin-bottom: 16px;
+  }
+}
+
+.controlForm {
+  color: white;
+  background-color: black;
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: 1 solid white;
+    padding: 5px 8px;
+  }
 }
