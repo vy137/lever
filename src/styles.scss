@@ -12,6 +12,7 @@ html {
 * {
   padding: 0;
   margin: 0;
+  font-family: monospace;
 }
 
 $darkest-graey: #323432;
@@ -25,7 +26,10 @@ body {
 .buttonReset {
   background: none;
   border: none;
+  font-size: inherit;
 }
+
+$nice-border: 1px solid white;
 
 .appearBefore {
   transform: translateZ(-10px);
@@ -94,9 +98,11 @@ body {
 .gauge {
   color: white;
   text-align: right;
-  font-family: monospace;
   margin-top: 10px;
-  font-size: 1.2rem;
+  font-size: 1.25em;
+  font-weight: 900;
+  border: $nice-border;
+  padding: 5px 8px;
 }
 
 .controlGrid {
@@ -117,13 +123,34 @@ body {
 .controlForm {
   color: white;
   background-color: black;
+  font-size: 1.1em;
+  font-weight: 500;
 
   input {
     box-sizing: border-box;
     width: 100%;
     background-color: black;
     color: white;
-    border: 1 solid white;
     padding: 5px 8px;
+    border: $nice-border;
+    font-size: 1.2em;
+    font-weight: 600;
+
+    &:focus,
+    &:active {
+      border: $nice-border;
+      outline: $nice-border;
+    }
+  }
+}
+
+.resetButton {
+  font-size: 1.2em;
+  font-weight: 600;
+  border: $nice-border;
+
+  &:active,
+  &:focus {
+    outline: $nice-border;
   }
 }

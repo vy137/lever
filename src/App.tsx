@@ -84,7 +84,12 @@ function App() {
             defaultValue={initialValue}
           />
         </div>
-        <button onClick={() => setPowerOut(initialValue)}>reset</button>
+        <button
+          className="buttonReset resetButton"
+          onClick={() => setPowerOut(initialValue)}
+        >
+          <p>reset</p>
+        </button>
       </div>
 
       <div className="deviceContainer">
