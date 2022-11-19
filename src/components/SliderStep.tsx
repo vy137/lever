@@ -1,9 +1,10 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 import Handle from "./Handle";
 
 export type SliderStepProps = {
   index: number;
   selected: boolean;
+  diff: number;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -14,6 +15,8 @@ export default function SliderStep(props: SliderStepProps) {
   })();
   const step = <div className="step" style={{ width: stepIndicatorWidthPx }} />;
 
+  const [hovering, setHovering] = useState(false);
+
   const Parent = (
     props: PropsWithChildren<SliderStepProps> & { className: string }
   ) =>
@@ -23,19 +26,35 @@ export default function SliderStep(props: SliderStepProps) {
       <button
         children={props.children}
         className={`${props.className} buttonReset`}
-        onMouseUp={props.onClick}
+        onMouseUp={(e) => {
+          setHovering(false);
+          props.onClick(e);
+        }}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
       />
     );
+
+  const signNum = (num: number) => (num > 0 ? `+${num}` : num.toString());
 
   return (
     <Parent
       index={props.index}
       selected={props.selected}
+      diff={props.diff}
       onClick={props.onClick}
       className={"handleSliderContainer"}
     >
       {props.selected ? <div /> : step}
-      <div className="handleSlider">{props.selected && <Handle />}</div>
+      <div className="handleSlider">
+        {props.selected ? (
+          <Handle />
+        ) : (
+          <p className="stepIndex">
+            {hovering ? signNum(props.diff) : Math.abs(props.index)}
+          </p>
+        )}
+      </div>
       {props.selected ? <div /> : step}
     </Parent>
   );

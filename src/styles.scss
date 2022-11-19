@@ -120,6 +120,10 @@ $nice-border: 1px solid white;
   }
 }
 
+.stepIndex {
+  color: $graey;
+}
+
 .controlForm {
   color: white;
   background-color: black;
@@ -153,4 +157,9 @@ $nice-border: 1px solid white;
   &:focus {
     outline: $nice-border;
   }
+}
+
+
+.leftSide {
+  
 }
