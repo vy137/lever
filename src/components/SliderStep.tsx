@@ -35,7 +35,9 @@ export default function SliderStep(props: SliderStepProps) {
       />
     );
 
-  const signNum = (num: number) => (num > 0 ? `+${num}` : num.toString());
+  // const signNum = (num: number) => (num > 0 ? `+${num}` : num.toString());
+  // const stepDisplay = hovering ? signNum(props.diff) : Math.abs(props.index);
+  const stepDisplay = Math.abs(props.index).toString();
 
   return (
     <Parent
@@ -50,9 +52,7 @@ export default function SliderStep(props: SliderStepProps) {
         {props.selected ? (
           <Handle />
         ) : (
-          <p className="stepIndex">
-            {hovering ? signNum(props.diff) : Math.abs(props.index)}
-          </p>
+          <p className="stepIndex">{stepDisplay}</p>
         )}
       </div>
       {props.selected ? <div /> : step}

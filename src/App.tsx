@@ -45,7 +45,7 @@ function App() {
     const absDiff = Math.pow(factor, Math.abs(index));
     return isUp ? absDiff : -absDiff;
   };
-  // When you have to do shit
+
   const updatePowerOut = (index: number) => {
     if (index === 0) return;
     const newPowerOut = powerOut + getDiff(index);
