@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./styles.scss";
 import SliderStep from "./components/SliderStep";
-import { cache } from "./cachedValues";
+import { useCachedValue } from "./cache";
 
 const steps = [
   { index: 4 },
@@ -22,17 +22,17 @@ function App() {
     undefined as undefined | number
   );
 
-  const [initialValue, setInitialValue] = useState(cache.initialValue ?? 2);
-  localStorage.setItem("initialValue", initialValue.toString());
-  const initialValueRef = useRef<HTMLInputElement>(null);
+  const [initialValue, updateInitialValue, initialValueRef] = useCachedValue(
+    "initialValue",
+    2
+  );
 
-  const [upFactor, setUpFactor] = useState(cache.upFactor ?? 3);
-  localStorage.setItem("upFactor", upFactor.toString());
-  const upFactorRef = useRef<HTMLInputElement>(null);
+  const [upFactor, updateUpFactor, upFactorRef] = useCachedValue("upFactor", 3);
 
-  const [downFactor, setDownFactor] = useState(cache.downFactor ?? 2);
-  localStorage.setItem("downFactor", downFactor.toString());
-  const downFactorRef = useRef<HTMLInputElement>(null);
+  const [downFactor, updateDownFactor, downFactorRef] = useCachedValue(
+    "downFactor",
+    2
+  );
 
   const [powerOut, setPowerOut] = useState(initialValue);
 
@@ -78,7 +78,7 @@ function App() {
               type="number"
               ref={upFactorRef}
               onChange={() => {
-                setUpFactor(upFactorRef.current?.valueAsNumber ?? upFactor);
+                updateUpFactor(upFactorRef.current?.valueAsNumber ?? upFactor);
                 resetActionLog;
               }}
               defaultValue={upFactor}
@@ -90,7 +90,7 @@ function App() {
               type="number"
               ref={downFactorRef}
               onChange={() => {
-                setDownFactor(
+                updateDownFactor(
                   downFactorRef.current?.valueAsNumber ?? downFactor
                 );
                 resetActionLog();
@@ -104,7 +104,7 @@ function App() {
               type="number"
               ref={initialValueRef}
               onChange={() => {
-                setInitialValue(
+                updateInitialValue(
                   initialValueRef.current?.valueAsNumber ?? initialValue
                 );
               }}
