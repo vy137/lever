@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./styles.scss";
 import SliderStep from "./components/SliderStep";
-import { useCachedValue } from "./cache";
+import { useCachedValue } from "./lib/cache";
 
 const steps = [
   { index: 4 },

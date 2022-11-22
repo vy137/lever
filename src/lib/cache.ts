@@ -11,10 +11,7 @@ export const cachedValues = {
   downFactor: getItem("downFactor"),
 };
 
-export function useCachedValue(
-  name: keyof typeof cachedValues,
-  defaultInitialValue: number
-) {
+export function useCachedValue(name: keyof typeof cachedValues, defaultInitialValue: number) {
   const [val, setVal] = useState(cachedValues[name] ?? defaultInitialValue);
   const setValAndUpdateCache = (newVal: typeof val) => {
     setVal(newVal);
