@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
-import "./styles.scss";
+import { useState } from "react";
 import SliderStep from "./components/SliderStep";
 import { useCachedValue } from "./lib/cache";
+import "./styles.scss";
 
 const steps = [
   { index: 4 },
@@ -18,22 +18,11 @@ const steps = [
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [lastTimeOutId, setLastTimeOutId] = useState(
-    undefined as undefined | number
-  );
+  const [lastTimeOutId, setLastTimeOutId] = useState(undefined as undefined | number);
 
-  const [initialValue, updateInitialValue, initialValueRef] = useCachedValue(
-    "initialValue",
-    2
-  );
-
+  const [initialValue, updateInitialValue, initialValueRef] = useCachedValue("initialValue", 2);
   const [upFactor, updateUpFactor, upFactorRef] = useCachedValue("upFactor", 3);
-
-  const [downFactor, updateDownFactor, downFactorRef] = useCachedValue(
-    "downFactor",
-    2
-  );
-
+  const [downFactor, updateDownFactor, downFactorRef] = useCachedValue("downFactor", 2);
   const [powerOut, setPowerOut] = useState(initialValue);
 
   const { actionLog, addToActionLog, resetActionLog } = useActionLog([]);
@@ -90,9 +79,7 @@ function App() {
               type="number"
               ref={downFactorRef}
               onChange={() => {
-                updateDownFactor(
-                  downFactorRef.current?.valueAsNumber ?? downFactor
-                );
+                updateDownFactor(downFactorRef.current?.valueAsNumber ?? downFactor);
                 resetActionLog();
               }}
               defaultValue={downFactor}
@@ -104,9 +91,7 @@ function App() {
               type="number"
               ref={initialValueRef}
               onChange={() => {
-                updateInitialValue(
-                  initialValueRef.current?.valueAsNumber ?? initialValue
-                );
+                updateInitialValue(initialValueRef.current?.valueAsNumber ?? initialValue);
               }}
               defaultValue={initialValue}
             />
@@ -130,16 +115,16 @@ function App() {
                 selected={index === selectedIndex}
                 diff={getDiff(index)}
                 onClick={() => {
-                  window.clearTimeout(lastTimeOutId);
-                  setSelectedIndex(index);
+                  if (index === selectedIndex) return;
 
-                  // Reset handle
+                  // Reset handle after timeout
+                  window.clearTimeout(lastTimeOutId);
                   const timeoutId = window.setTimeout(() => {
                     setSelectedIndex(0);
                   }, 600);
                   setLastTimeOutId(timeoutId);
 
-                  // Do the thing
+                  setSelectedIndex(index);
                   updatePowerOut(index);
                 }}
                 key={index}
@@ -171,8 +156,7 @@ type GaugeAction = {
 
 function useActionLog(initial: GaugeAction[]) {
   const [actionLog, setActionLog] = useState(initial);
-  const addToActionLog = (action: GaugeAction) =>
-    setActionLog(actionLog.concat(action));
+  const addToActionLog = (action: GaugeAction) => setActionLog(actionLog.concat(action));
   const resetActionLog = () => setActionLog([]);
 
   return { actionLog, setActionLog, addToActionLog, resetActionLog };
